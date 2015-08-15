@@ -1,24 +1,44 @@
 function numberInWords(n){
-  var str = n.toString();
+  var numStr = n.toString();
+  var lastIndex = numStr.length - 1;
   var output = '';
   var digits = digit_value;
-  if(str.length === 1){
-    return digits[n];
-  } else {
-    digits[0] = '';
-    output += dizaine[str[0]];
-
-    if(str[1]){
-      output +=  '-' + digits[str[1]];
-    }
-    //output +=  ? '-' + digits[str[1]] : '';
+  if(n === 0){
+    return 'zero';
   }
+  if(n>=10 && n<20){
+    return digit_value[n];
+  }
+  var c;
+  if(numStr.length >= 1){
+    c = numStr[lastIndex];
+    output = digits[c];
+  }
+  if(numStr.length >= 2){
+    c = numStr[lastIndex - 1];
+    
+    if(output){
+      output = dizaine[c] + '-' + output;
+    } else {
+      output = dizaine[c];
+    }
+  }
+  if(numStr.length === 3){
+    c = numStr[lastIndex - 2];
+    var part = digits[c] + ' hundred ';
 
-  return output;
+    if(output){
+      output = part + output;
+    } else {
+      output = part;
+    }
+  }
+  
+  return output.trim();
 }
 
 var digit_value = [
-  'zero',
+  '',
   'one',
   'two',
   'three',
@@ -27,7 +47,31 @@ var digit_value = [
   'six',
   'seven',
   'eight',
-  'nine'];
+  'nine',
+  'ten',
+  'eleven',
+  'twelve',
+  'thirteen',
+  'fourteen',
+  'fifteen',
+  'sixteen',
+  'seventeen',
+  'eighteen',
+  'nineteen'
+  ];
+
+  var teen = [
+    'ten',
+    'eleven',
+    'twelve',
+    'thirteen',
+    'fourteen',
+    'fifteen',
+    'sixteen',
+    'seventeen',
+    'eighteen',
+    'nineteen'
+  ];
 
   var dizaine = [
     '',
